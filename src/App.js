@@ -1,16 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 import NavBar from './NavBar';
 import Map from './Map';
+import LocationView from './LocationView';
 
 function App() {
+  const [viewLocName, setViewLocName] = useState(null);
+
   return (
     <div>
       <NavBar />
-      <Map />
-      <h1 className="text-3xl font-bold underline">
-        Lorem ipsum. . .
-      </h1>
+      <Map 
+        setViewLoc={setViewLocName}
+      />
+      <LocationView 
+        locName={viewLocName}
+      />
     </div>
   );
 }
