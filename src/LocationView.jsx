@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function LocationView(props){
-  //TODO: Get information about location from viewloc's server
   const [description, setDescription] = useState(null);
   const [rating, setRating] = useState(0);
+  const [name, setName] = useState(null);
+  const [locId, setLocId] = useState("test init");
 
-  fetch("http://localhost:5000/info?locId=FrontendRequest")
-    .then(res => { res.json().then(data => {
-      setDescription(data.description);
-      setRating(data.rating);
-    }) });
+  useEffect(() => {
+    if (locId !== props.locId){
+      fetch(`http://localhost:5000/info?locId=${locId}`)
+      .then(res => { if (res.ok) { return res.json() }}).then(data => {
+        setName(data.name);
+        setDescription(data.description);
+        setRating(data.rating);
+        setLocId(props.locId);
+        console.log(data);
+      });
+    }
+  }, []);
+
 
   return(
     <div>
@@ -18,8 +27,8 @@ function LocationView(props){
           TODO: Carousel
         </div>
         <div className="bg-white">
+          { name } | score: { rating } <br/>
           { description } <br/>
-          { rating }
         </div>
         <div className="bg-white">
           TODO: Ratings

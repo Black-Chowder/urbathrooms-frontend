@@ -15,7 +15,7 @@ function App() {
         setViewLoc={setViewLocName}
       />
       <LocationView 
-        locName={viewLocName}
+        locId={viewLocName}
       />
     </div>
   );
