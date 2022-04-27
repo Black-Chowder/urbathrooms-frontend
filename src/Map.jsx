@@ -1,26 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 function Map(props){
-  const locations = props.locations || [{ x: 43.1283552, y: -77.6291973, name: "Hello World!" }];
-  //const [locations, setLocations] = useState(props.locations || [{ x: 51.505, y: -0.09, name: "Hello World!" }]);
+  const locations = props.locations;
+  const setFocusLocation = props.setFocusLocation;
+  
+  const locationClicked = element => {
+    const location = locations[element.target.id];
+    setFocusLocation(location);
+  }
 
   const renderLocations = () => {
     let result = [];
 
     if (locations === null) return (<div/>);
 
+    let i = 0;
     locations.forEach(location => {
+      console.log(location);
       result.push(
-        <Marker key={location.name} position={[location.x, location.y]}>
+        <Marker key={location._id} position={[location.latitude, location.longitude]}>
           <Popup>
-            <div className="m-2 bg-blue-500 rounded-md">
-              Test
+            <div className="">
+              {location.name}
             </div>
-            {location.name}
+            <img 
+              src={`http://localhost:5000/getImage/${location.previewImage}`} 
+              alt="Preview Image"
+              className="mb-2"/>
+            <div className="p-2 bg-blue-500 rounded-md cursor-pointer" onClick={locationClicked} id={i}>
+              View Location
+            </div>
           </Popup>
         </Marker>
       );
+      i++;
     });
 
     return result;

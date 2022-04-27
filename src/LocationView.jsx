@@ -1,41 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 function LocationView(props){
-  const [description, setDescription] = useState(null);
-  const [rating, setRating] = useState(0);
-  const [name, setName] = useState(null);
-  const [locId, setLocId] = useState("test init");
+  const location = props.location;
 
+
+  const fieldRef = useRef();
   useEffect(() => {
-    if (locId !== props.locId){
-      fetch(`http://localhost:5000/info?locId=${locId}`)
-      .then(res => { if (res.ok) { return res.json() }}).then(data => {
-        setName(data.name);
-        setDescription(data.description);
-        setRating(data.rating);
-        setLocId(props.locId);
-        console.log(data);
-      });
-    }
-  }, []);
+    if (location === null)
+      return;
 
+    if (fieldRef.current) {
+      fieldRef.current.scrollIntoView({ behavior: "smooth" });
+      console.log("Scroll into view called");
+    }
+  });
+
+  if (location === null){
+    return (<div/>);
+  }
+
+  const name = location.name;
+  const rating = location.rating;
+  const description = location.description;
+  const imageIds = location.images;
 
   return(
-    <div>
-      <div className="mx-auto mb-20 w-9/12 content-center bg-blue-500 grid grid-cols-3 gap-4" style={{height: 800}}>
-        <div className="bg-white col-span-2 row-span-2">
+    <div className="rounded-xl mx-auto mb-20 w-9/12 content-center bg-blue-500 p-4" style={{ height: 800 }} ref={fieldRef}>
+      <div className="grid grid-cols-7 gap-4" style={{height: "100%"}}>
+        <div className="bg-black bg-opacity-25 col-span-4 row-span-2 py-5 px-2 rounded-xl">
           TODO: Carousel
         </div>
-        <div className="bg-white">
-          { name } | score: { rating } <br/>
+        <div className="bg-black bg-opacity-25 col-span-3 py-5 px-2 rounded-xl">
+          { name } | Rating: { rating } <br/>
           { description } <br/>
         </div>
-        <div className="bg-white">
+        <div className="bg-black bg-opacity-25 col-span-3 py-5 px-2 rounded-xl">
           TODO: Ratings
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default LocationView;

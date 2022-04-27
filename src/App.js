@@ -1,21 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import Map from './Map';
 import LocationView from './LocationView';
 
 function App() {
-  const [viewLocName, setViewLocName] = useState(null);
+
+  const [focusLocation, setFocusLocation] = useState(null);
+  const [locations, setLocations] = useState(null);
+
+  //Get locations and location data
+  useEffect(() => {
+    if (locations === null){
+      fetch(`http://localhost:5000/locations?campus=river`)
+      .then(res => { if (res.ok) { return res.json() }}).then(data => {
+        setLocations(data);
+      });
+    }
+  }, []);
 
   return (
     <div>
       <NavBar />
       <Map 
-        setViewLoc={setViewLocName}
+        locations={locations}
+        setFocusLocation={setFocusLocation}
       />
       <LocationView 
-        locId={viewLocName}
+        location={focusLocation}
       />
     </div>
   );
