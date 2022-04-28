@@ -28,7 +28,7 @@ function Map(props){
               src={`http://localhost:5000/getImage/${location.previewImage}`} 
               alt="Preview Image"
               className="mb-2"/>
-            <div className="p-2 bg-blue-500 rounded-md cursor-pointer" onClick={locationClicked} id={i}>
+            <div className="p-2 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-600" onClick={locationClicked} id={i}>
               View Location
             </div>
           </Popup>
