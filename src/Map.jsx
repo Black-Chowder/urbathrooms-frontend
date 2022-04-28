@@ -16,8 +16,7 @@ function Map(props){
 
     if (locations === null) return (<div/>);
 
-    let i = 0;
-    locations.forEach(location => {
+    locations.forEach((location, i) => {
       result.push(
         <Marker key={location._id} position={[location.latitude, location.longitude]}>
           <Popup>
@@ -34,7 +33,6 @@ function Map(props){
           </Popup>
         </Marker>
       );
-      i++;
     });
 
     return result;
