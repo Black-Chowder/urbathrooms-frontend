@@ -24,7 +24,7 @@ function Map(props){
               {location.name}
             </div>
             <img 
-              src={`${BACKEND_URI}getImage/${location.previewImage}`} 
+              src={`${BACKEND_URI}images/${location.previewImage}`} 
               alt="Preview Image"
               className="mb-2"/>
             <div className="p-2 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-600" onClick={locationClicked} id={i}>

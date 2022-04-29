@@ -27,7 +27,7 @@ function LocationView(props){
 
   const imageSources = [];
   imageIds.map(id => {
-    imageSources.push(`${BACKEND_URI}getImage/${id}`);
+    imageSources.push(`${BACKEND_URI}images/${id}`);
   });
 
   return(
