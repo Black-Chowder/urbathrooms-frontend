@@ -36,7 +36,9 @@ function LocationView(props){
     description.split('\n').forEach(line => {
       console.log(line);
       toReturn.push(
-        <p>{line}</p>
+        <div>
+        <p>{line}</p><br/>
+        </div>
       );
     });
     
@@ -51,7 +53,7 @@ function LocationView(props){
         </div>
         <div className="bg-gray-200 col-span-3 row-span-2 py-5 px-2 rounded-xl shadow-inner">
           <div className="flex space-x-4">
-            <p className="text-lg text-black font-bold">{name}</p> <p className="text-lg">Rating: {rating} </p>
+            <p className="text-lg text-black font-bold">{name}</p> <p className="text-lg">Rating: {rating} / 5 </p>
           </div>
           <div className="py-4">
             {renderDescription()}
