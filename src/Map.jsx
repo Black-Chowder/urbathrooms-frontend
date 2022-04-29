@@ -20,14 +20,14 @@ function Map(props){
       result.push(
         <Marker key={location._id} position={[location.latitude, location.longitude]}>
           <Popup>
-            <div className="">
+            <div className="text-black font-semibold text-sm">
               {location.name}
             </div>
             <img 
-              src={`${BACKEND_URI}images/${location.previewImage}`} 
+              src={`${BACKEND_URI}images/${location.previewImage === "" ? location.images[0] : location.previewImage}`} 
               alt="Preview Image"
               className="mb-2"/>
-            <div className="p-2 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-600" onClick={locationClicked} id={i}>
+            <div className="p-2 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300 shadow-md" onClick={locationClicked} id={i}>
               View Location
             </div>
           </Popup>

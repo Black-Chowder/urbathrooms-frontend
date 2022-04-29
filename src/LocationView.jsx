@@ -25,10 +25,23 @@ function LocationView(props){
   const description = location.description;
   const imageIds = location.images;
 
+  //Convert image ids to image sources
   const imageSources = [];
   imageIds.map(id => {
     imageSources.push(`${BACKEND_URI}images/${id}`);
   });
+
+  const renderDescription = () => {
+    const toReturn = [];
+    description.split('\n').forEach(line => {
+      console.log(line);
+      toReturn.push(
+        <p>{line}</p>
+      );
+    });
+    
+    return toReturn;
+  }
 
   return(
     <div className="rounded-xl mx-auto mb-20 w-9/12 content-center bg-gray-100 p-4 shadow-2xl" style={{ height: 800 }} ref={fieldRef}>
@@ -36,15 +49,19 @@ function LocationView(props){
         <div className="col-span-4 row-span-2 rounded-xl flex items-center">
           <Carousel srcs={imageSources}/>
         </div>
-        <div className="bg-gray-200 col-span-3 py-5 px-2 rounded-xl shadow-inner">
+        <div className="bg-gray-200 col-span-3 row-span-2 py-5 px-2 rounded-xl shadow-inner">
           <div className="flex space-x-4">
             <p className="text-lg text-black font-bold">{name}</p> <p className="text-lg">Rating: {rating} </p>
           </div>
-          <p>{description}</p>
+          <div className="py-4">
+            {renderDescription()}
+          </div>
         </div>
+        {/* 
         <div className="bg-gray-200 col-span-3 py-5 px-2 rounded-xl shadow-inner">
           TODO: Ratings
         </div>
+        */}
       </div>
     </div>
   );
