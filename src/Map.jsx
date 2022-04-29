@@ -38,7 +38,7 @@ function Map(props){
   }
 
   return (
-    <MapContainer className="w-9/12 m-auto my-4" style={{ height: "800px" }} center={[43.1283552, -77.6291973]} zoom={16.5} scrollWheelZoom={false}>
+    <MapContainer tap={false} className="w-9/12 m-auto my-4" style={{ height: "800px" }} center={[43.1283552, -77.6291973]} zoom={16.5} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
