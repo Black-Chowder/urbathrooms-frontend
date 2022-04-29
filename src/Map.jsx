@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { BACKEND_URI } from './GlobalConsts';
 
 function Map(props){
   const locations = props.locations;
@@ -24,7 +23,7 @@ function Map(props){
               {location.name}
             </div>
             <img 
-              src={`${BACKEND_URI}images/${location.previewImage === "" ? location.images[0] : location.previewImage}`} 
+              src={`${process.env.REACT_APP_BACKEND_URI}images/${location.previewImage === "" ? location.images[0] : location.previewImage}`} 
               alt="Preview Image"
               className="mb-2"/>
             <div className="p-2 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300 shadow-md" onClick={locationClicked} id={i}>

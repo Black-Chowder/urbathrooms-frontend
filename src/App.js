@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import Map from './Map';
 import LocationView from './LocationView';
-import { BACKEND_URI } from './GlobalConsts';
 
 function App() {
 
@@ -14,7 +13,7 @@ function App() {
   //Get locations and location data
   useEffect(() => {
     if (locations === null){
-      fetch(`${BACKEND_URI}locations?campus=river`)
+      fetch(`${process.env.REACT_APP_BACKEND_URI}locations?campus=river`)
       .then(res => { if (res.ok) { return res.json() }}).then(data => {
         setLocations(data);
       });

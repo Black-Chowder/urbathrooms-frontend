@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { BACKEND_URI } from './GlobalConsts';
 import Carousel from './Carousel';
 
 function LocationView(props){
@@ -28,7 +27,7 @@ function LocationView(props){
   //Convert image ids to image sources
   const imageSources = [];
   imageIds.map(id => {
-    imageSources.push(`${BACKEND_URI}images/${id}`);
+    imageSources.push(`${process.env.REACT_APP_BACKEND_URI}images/${id}`);
   });
 
   const renderDescription = () => {
